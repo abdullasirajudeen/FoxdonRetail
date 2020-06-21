@@ -1,0 +1,50 @@
+﻿@model FoxdonRetail.Models.ShopTbl
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ShopTbl</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShopName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShopName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShopPlace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShopPlace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShopCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShopCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GSTIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GSTIN)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ShopID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

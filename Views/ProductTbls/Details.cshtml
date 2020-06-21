@@ -1,0 +1,58 @@
+﻿@model FoxdonRetail.Models.ProductTbl
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProductTbl</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductMRP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductMRP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SellingPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SellingPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FoxdonPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FoxdonPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryTbl.CatName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryTbl.CatName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShopTbl.ShopName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShopTbl.ShopName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
