@@ -167,6 +167,7 @@
     <Compile Include="Controllers\AdminTblsController.cs" />
     <Compile Include="Controllers\CategoryTblsController.cs" />
     <Compile Include="Controllers\CredenstialTblsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductImageTblsController.cs" />
     <Compile Include="Controllers\ProductTblsController.cs" />
     <Compile Include="Controllers\ShopTblsController.cs" />
@@ -227,6 +228,7 @@
     <Content Include="Views\AdminTbls\Index.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
