@@ -6,10 +6,10 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "ProductImageTbls", FormMethod.Post, new { enctype = "multipart/form-data", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>ProductImageTbl</h4>
         <hr />

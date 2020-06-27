@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -48,14 +49,36 @@ namespace FoxdonRetail.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProdImgID,ProductID,ImagePath")] ProductImageTbl productImageTbl)
+        public ActionResult Create(ProductImageTbl productImageTbl, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.ProductImageTbls.Add(productImageTbl);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (file.ContentLength > 0)
+                {
+                    string _Extenstion = Path.GetExtension(file.FileName);
+                    if (_Extenstion == ".pdf")
+                    {
+                        string _FileName = Path.GetFileName(file.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/ImageUpload"), _FileName);  //Folder Name ee Blue
+                        if (ModelState.IsValid)
+                        {
+                            file.SaveAs(_path);
+                            productImageTbl.ImagePath = _FileName;
+                            db.ProductImageTbls.Add(productImageTbl);
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        return RedirectToAction("Index");
+                    }
+                    ModelState.AddModelError("MeterailPath", "Not Valid File Type");
+                }
+
             }
+            catch
+            {
+                ModelState.AddModelError("MeterailPath", "Uploading Failed");
+            }
+
 
             ViewBag.ProductID = new SelectList(db.ProductTbls, "ProductID", "ProductName", productImageTbl.ProductID);
             return View(productImageTbl);
@@ -82,7 +105,7 @@ namespace FoxdonRetail.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProdImgID,ProductID,ImagePath")] ProductImageTbl productImageTbl)
+        public ActionResult Edit(ProductImageTbl productImageTbl)
         {
             if (ModelState.IsValid)
             {
