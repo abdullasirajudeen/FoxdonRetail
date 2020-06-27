@@ -17,6 +17,7 @@ namespace FoxdonRetail.Models
         public long ProductID { get; set; }
         public Nullable<long> CatID { get; set; }
         public Nullable<long> ShopID { get; set; }
+        public string ProductName { get; set; }
         public Nullable<int> ProductMRP { get; set; }
         public Nullable<int> SellingPrice { get; set; }
         public Nullable<int> FoxdonPrice { get; set; }

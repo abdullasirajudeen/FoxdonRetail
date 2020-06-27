@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HackbalFoxdonRetailModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HackbalFoxdonRetailModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminTbl">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -43,6 +43,7 @@
           <Property Name="ProductID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CatID" Type="bigint" />
           <Property Name="ShopID" Type="bigint" />
+          <Property Name="ProductName" Type="varchar" MaxLength="50" />
           <Property Name="ProductMRP" Type="int" />
           <Property Name="SellingPrice" Type="int" />
           <Property Name="FoxdonPrice" Type="int" />
@@ -113,8 +114,7 @@
             <End Role="ProductTbl" EntitySet="ProductTbl" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HackbalFoxdonRetailModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -133,7 +133,7 @@
           </Key>
           <Property Name="CatID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CatName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ProductTbls" Relationship="Self.FK_ProductTbl_ProductTbl" FromRole="CategoryTbl" ToRole="ProductTbl" />
+          <NavigationProperty Name="ProductTbls" Relationship="HackbalFoxdonRetailModel.FK_ProductTbl_ProductTbl" FromRole="CategoryTbl" ToRole="ProductTbl" />
         </EntityType>
         <EntityType Name="CredenstialTbl">
           <Key>
@@ -152,19 +152,6 @@
           <Property Name="ProductID" Type="Int64" />
           <Property Name="ImagePath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="ProductTbl">
-          <Key>
-            <PropertyRef Name="ProductID" />
-          </Key>
-          <Property Name="ProductID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CatID" Type="Int64" />
-          <Property Name="ShopID" Type="Int64" />
-          <Property Name="ProductMRP" Type="Int32" />
-          <Property Name="SellingPrice" Type="Int32" />
-          <Property Name="FoxdonPrice" Type="Int32" />
-          <NavigationProperty Name="CategoryTbl" Relationship="Self.FK_ProductTbl_ProductTbl" FromRole="ProductTbl" ToRole="CategoryTbl" />
-          <NavigationProperty Name="ShopTbl" Relationship="Self.FK_ProductTbl_ShopTbl" FromRole="ProductTbl" ToRole="ShopTbl" />
-        </EntityType>
         <EntityType Name="ShopTbl">
           <Key>
             <PropertyRef Name="ShopID" />
@@ -174,7 +161,7 @@
           <Property Name="ShopPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ShopCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="GSTIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ProductTbls" Relationship="Self.FK_ProductTbl_ShopTbl" FromRole="ShopTbl" ToRole="ProductTbl" />
+          <NavigationProperty Name="ProductTbls" Relationship="HackbalFoxdonRetailModel.FK_ProductTbl_ShopTbl" FromRole="ShopTbl" ToRole="ProductTbl" />
         </EntityType>
         <Association Name="FK_AdminTbl_CredenstialTbl">
           <End Role="CredenstialTbl" Type="Self.CredenstialTbl" Multiplicity="0..1" />
@@ -188,9 +175,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminTbls" EntityType="Self.AdminTbl" />
+          <EntitySet Name="CategoryTbls" EntityType="Self.CategoryTbl" />
+          <EntitySet Name="CredenstialTbls" EntityType="Self.CredenstialTbl" />
+          <EntitySet Name="ProductImageTbls" EntityType="Self.ProductImageTbl" />
+          <EntitySet Name="ShopTbls" EntityType="Self.ShopTbl" />
+          <AssociationSet Name="FK_AdminTbl_CredenstialTbl" Association="Self.FK_AdminTbl_CredenstialTbl">
+            <End Role="CredenstialTbl" EntitySet="CredenstialTbls" />
+            <End Role="AdminTbl" EntitySet="AdminTbls" />
+          </AssociationSet>
+          <EntitySet Name="ProductTbls" EntityType="HackbalFoxdonRetailModel.ProductTbl" />
+          <AssociationSet Name="FK_ProductTbl_ProductTbl" Association="HackbalFoxdonRetailModel.FK_ProductTbl_ProductTbl">
+            <End Role="CategoryTbl" EntitySet="CategoryTbls" />
+            <End Role="ProductTbl" EntitySet="ProductTbls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTbl_ShopTbl" Association="HackbalFoxdonRetailModel.FK_ProductTbl_ShopTbl">
+            <End Role="ShopTbl" EntitySet="ShopTbls" />
+            <End Role="ProductTbl" EntitySet="ProductTbls" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="ProductTbl">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatID" Type="Int64" />
+          <Property Name="ShopID" Type="Int64" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProductMRP" Type="Int32" />
+          <Property Name="SellingPrice" Type="Int32" />
+          <Property Name="FoxdonPrice" Type="Int32" />
+          <NavigationProperty Name="CategoryTbl" Relationship="HackbalFoxdonRetailModel.FK_ProductTbl_ProductTbl" FromRole="ProductTbl" ToRole="CategoryTbl" />
+          <NavigationProperty Name="ShopTbl" Relationship="HackbalFoxdonRetailModel.FK_ProductTbl_ShopTbl" FromRole="ProductTbl" ToRole="ShopTbl" />
+        </EntityType>
         <Association Name="FK_ProductTbl_ProductTbl">
-          <End Role="CategoryTbl" Type="Self.CategoryTbl" Multiplicity="0..1" />
-          <End Role="ProductTbl" Type="Self.ProductTbl" Multiplicity="*" />
+          <End Type="HackbalFoxdonRetailModel.CategoryTbl" Role="CategoryTbl" Multiplicity="0..1" />
+          <End Type="HackbalFoxdonRetailModel.ProductTbl" Role="ProductTbl" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CategoryTbl">
               <PropertyRef Name="CatID" />
@@ -201,8 +222,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductTbl_ShopTbl">
-          <End Role="ShopTbl" Type="Self.ShopTbl" Multiplicity="0..1" />
-          <End Role="ProductTbl" Type="Self.ProductTbl" Multiplicity="*" />
+          <End Type="HackbalFoxdonRetailModel.ShopTbl" Role="ShopTbl" Multiplicity="0..1" />
+          <End Type="HackbalFoxdonRetailModel.ProductTbl" Role="ProductTbl" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ShopTbl">
               <PropertyRef Name="ShopID" />
@@ -212,26 +233,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AdminTbls" EntityType="Self.AdminTbl" />
-          <EntitySet Name="CategoryTbls" EntityType="Self.CategoryTbl" />
-          <EntitySet Name="CredenstialTbls" EntityType="Self.CredenstialTbl" />
-          <EntitySet Name="ProductImageTbls" EntityType="Self.ProductImageTbl" />
-          <EntitySet Name="ProductTbls" EntityType="Self.ProductTbl" />
-          <EntitySet Name="ShopTbls" EntityType="Self.ShopTbl" />
-          <AssociationSet Name="FK_AdminTbl_CredenstialTbl" Association="Self.FK_AdminTbl_CredenstialTbl">
-            <End Role="CredenstialTbl" EntitySet="CredenstialTbls" />
-            <End Role="AdminTbl" EntitySet="AdminTbls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductTbl_ProductTbl" Association="Self.FK_ProductTbl_ProductTbl">
-            <End Role="CategoryTbl" EntitySet="CategoryTbls" />
-            <End Role="ProductTbl" EntitySet="ProductTbls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductTbl_ShopTbl" Association="Self.FK_ProductTbl_ShopTbl">
-            <End Role="ShopTbl" EntitySet="ShopTbls" />
-            <End Role="ProductTbl" EntitySet="ProductTbls" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -273,18 +274,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductTbls">
-            <EntityTypeMapping TypeName="HackbalFoxdonRetailModel.ProductTbl">
-              <MappingFragment StoreEntitySet="ProductTbl">
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="CatID" ColumnName="CatID" />
-                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
-                <ScalarProperty Name="ProductMRP" ColumnName="ProductMRP" />
-                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
-                <ScalarProperty Name="FoxdonPrice" ColumnName="FoxdonPrice" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ShopTbls">
             <EntityTypeMapping TypeName="HackbalFoxdonRetailModel.ShopTbl">
               <MappingFragment StoreEntitySet="ShopTbl">
@@ -293,6 +282,19 @@
                 <ScalarProperty Name="ShopPlace" ColumnName="ShopPlace" />
                 <ScalarProperty Name="ShopCity" ColumnName="ShopCity" />
                 <ScalarProperty Name="GSTIN" ColumnName="GSTIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTbls">
+            <EntityTypeMapping TypeName="HackbalFoxdonRetailModel.ProductTbl">
+              <MappingFragment StoreEntitySet="ProductTbl">
+                <ScalarProperty Name="FoxdonPrice" ColumnName="FoxdonPrice" />
+                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+                <ScalarProperty Name="ProductMRP" ColumnName="ProductMRP" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
