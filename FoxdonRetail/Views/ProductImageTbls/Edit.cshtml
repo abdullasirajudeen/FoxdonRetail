@@ -6,11 +6,10 @@
 
 <h2>Edit</h2>
 
-
-@using (Html.BeginForm("Create", "ProductImageTbls", FormMethod.Post, new { enctype = "multipart/form-data", role = "form" }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
         <h4>ProductImageTbl</h4>
         <hr />
@@ -44,7 +43,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

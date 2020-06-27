@@ -146,11 +146,6 @@
     <Content Include="Views\CredenstialTbls\Details.cshtml" />
     <Content Include="Views\CredenstialTbls\Edit.cshtml" />
     <Content Include="Views\CredenstialTbls\Index.cshtml" />
-    <Content Include="Views\ProductImageTbls\Create.cshtml" />
-    <Content Include="Views\ProductImageTbls\Delete.cshtml" />
-    <Content Include="Views\ProductImageTbls\Details.cshtml" />
-    <Content Include="Views\ProductImageTbls\Edit.cshtml" />
-    <Content Include="Views\ProductImageTbls\Index.cshtml" />
     <Content Include="Views\ProductTbls\Create.cshtml" />
     <Content Include="Views\ProductTbls\Delete.cshtml" />
     <Content Include="Views\ProductTbls\Details.cshtml" />
@@ -229,6 +224,11 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\ProductImageTbls\Create.cshtml" />
+    <Content Include="Views\ProductImageTbls\Delete.cshtml" />
+    <Content Include="Views\ProductImageTbls\Details.cshtml" />
+    <Content Include="Views\ProductImageTbls\Edit.cshtml" />
+    <Content Include="Views\ProductImageTbls\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
