@@ -26,7 +26,7 @@
             @Html.DisplayFor(modelItem => item.ProductID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
+            <img src="~/ImageUpload/@item.ImagePath" />
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ProdImgID }) |
