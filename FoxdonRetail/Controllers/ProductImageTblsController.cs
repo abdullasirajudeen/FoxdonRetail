@@ -17,7 +17,8 @@ namespace FoxdonRetail.Controllers
         // GET: ProductImageTbls
         public ActionResult Index()
         {
-            return View(db.ProductImageTbls.ToList());
+            var productImageTbls = db.ProductImageTbls.Include(p => p.ProductTbl);
+            return View(productImageTbls.ToList());
         }
 
         // GET: ProductImageTbls/Details/5
@@ -38,6 +39,7 @@ namespace FoxdonRetail.Controllers
         // GET: ProductImageTbls/Create
         public ActionResult Create()
         {
+            ViewBag.ProductID = new SelectList(db.ProductTbls, "ProductID", "ProductName");
             return View();
         }
 
@@ -55,6 +57,7 @@ namespace FoxdonRetail.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ProductID = new SelectList(db.ProductTbls, "ProductID", "ProductName", productImageTbl.ProductID);
             return View(productImageTbl);
         }
 
@@ -70,6 +73,7 @@ namespace FoxdonRetail.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ProductID = new SelectList(db.ProductTbls, "ProductID", "ProductName", productImageTbl.ProductID);
             return View(productImageTbl);
         }
 
@@ -86,6 +90,7 @@ namespace FoxdonRetail.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ProductID = new SelectList(db.ProductTbls, "ProductID", "ProductName", productImageTbl.ProductID);
             return View(productImageTbl);
         }
 

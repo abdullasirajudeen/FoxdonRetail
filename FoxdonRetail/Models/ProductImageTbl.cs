@@ -17,5 +17,7 @@ namespace FoxdonRetail.Models
         public long ProdImgID { get; set; }
         public Nullable<long> ProductID { get; set; }
         public string ImagePath { get; set; }
+    
+        public virtual ProductTbl ProductTbl { get; set; }
     }
 }

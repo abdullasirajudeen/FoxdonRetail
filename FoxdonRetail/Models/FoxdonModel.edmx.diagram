@@ -8,11 +8,12 @@
         <EntityTypeShape EntityType="HackbalFoxdonRetailModel.AdminTbl" Width="1.5" PointX="5" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HackbalFoxdonRetailModel.CategoryTbl" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="HackbalFoxdonRetailModel.CredenstialTbl" Width="1.5" PointX="2.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HackbalFoxdonRetailModel.ProductImageTbl" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HackbalFoxdonRetailModel.ShopTbl" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <AssociationConnector Association="HackbalFoxdonRetailModel.FK_AdminTbl_CredenstialTbl" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="HackbalFoxdonRetailModel.ProductTbl" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="HackbalFoxdonRetailModel.ProductImageTbl" Width="1.5" PointX="5.25" PointY="1.5" />
+        <EntityTypeShape EntityType="HackbalFoxdonRetailModel.ProductTbl" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="HackbalFoxdonRetailModel.FK_ProductTbl_ProductTbl" />
+        <AssociationConnector Association="HackbalFoxdonRetailModel.FK_ProductImageTbl_ProductTbl" />
         <AssociationConnector Association="HackbalFoxdonRetailModel.FK_ProductTbl_ShopTbl" />
         </Diagram>
     </edmx:Diagrams>

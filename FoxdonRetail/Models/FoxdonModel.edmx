@@ -70,6 +70,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductImageTbl_ProductTbl">
+          <End Role="ProductTbl" Type="Self.ProductTbl" Multiplicity="0..1" />
+          <End Role="ProductImageTbl" Type="Self.ProductImageTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTbl">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductImageTbl">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductTbl_ProductTbl">
           <End Role="CategoryTbl" Type="Self.CategoryTbl" Multiplicity="0..1" />
           <End Role="ProductTbl" Type="Self.ProductTbl" Multiplicity="*" />
@@ -104,6 +116,10 @@
           <AssociationSet Name="FK_AdminTbl_CredenstialTbl" Association="Self.FK_AdminTbl_CredenstialTbl">
             <End Role="CredenstialTbl" EntitySet="CredenstialTbl" />
             <End Role="AdminTbl" EntitySet="AdminTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductImageTbl_ProductTbl" Association="Self.FK_ProductImageTbl_ProductTbl">
+            <End Role="ProductTbl" EntitySet="ProductTbl" />
+            <End Role="ProductImageTbl" EntitySet="ProductImageTbl" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductTbl_ProductTbl" Association="Self.FK_ProductTbl_ProductTbl">
             <End Role="CategoryTbl" EntitySet="CategoryTbl" />
@@ -144,14 +160,6 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AdminTbls" Relationship="Self.FK_AdminTbl_CredenstialTbl" FromRole="CredenstialTbl" ToRole="AdminTbl" />
         </EntityType>
-        <EntityType Name="ProductImageTbl">
-          <Key>
-            <PropertyRef Name="ProdImgID" />
-          </Key>
-          <Property Name="ProdImgID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductID" Type="Int64" />
-          <Property Name="ImagePath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="ShopTbl">
           <Key>
             <PropertyRef Name="ShopID" />
@@ -179,22 +187,35 @@
           <EntitySet Name="AdminTbls" EntityType="Self.AdminTbl" />
           <EntitySet Name="CategoryTbls" EntityType="Self.CategoryTbl" />
           <EntitySet Name="CredenstialTbls" EntityType="Self.CredenstialTbl" />
-          <EntitySet Name="ProductImageTbls" EntityType="Self.ProductImageTbl" />
           <EntitySet Name="ShopTbls" EntityType="Self.ShopTbl" />
           <AssociationSet Name="FK_AdminTbl_CredenstialTbl" Association="Self.FK_AdminTbl_CredenstialTbl">
             <End Role="CredenstialTbl" EntitySet="CredenstialTbls" />
             <End Role="AdminTbl" EntitySet="AdminTbls" />
           </AssociationSet>
+          <EntitySet Name="ProductImageTbls" EntityType="HackbalFoxdonRetailModel.ProductImageTbl" />
           <EntitySet Name="ProductTbls" EntityType="HackbalFoxdonRetailModel.ProductTbl" />
           <AssociationSet Name="FK_ProductTbl_ProductTbl" Association="HackbalFoxdonRetailModel.FK_ProductTbl_ProductTbl">
             <End Role="CategoryTbl" EntitySet="CategoryTbls" />
             <End Role="ProductTbl" EntitySet="ProductTbls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductImageTbl_ProductTbl" Association="HackbalFoxdonRetailModel.FK_ProductImageTbl_ProductTbl">
+            <End Role="ProductTbl" EntitySet="ProductTbls" />
+            <End Role="ProductImageTbl" EntitySet="ProductImageTbls" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductTbl_ShopTbl" Association="HackbalFoxdonRetailModel.FK_ProductTbl_ShopTbl">
             <End Role="ShopTbl" EntitySet="ShopTbls" />
             <End Role="ProductTbl" EntitySet="ProductTbls" />
           </AssociationSet>
           </EntityContainer>
+        <EntityType Name="ProductImageTbl">
+          <Key>
+            <PropertyRef Name="ProdImgID" />
+          </Key>
+          <Property Name="ProdImgID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int64" />
+          <Property Name="ImagePath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ProductTbl" Relationship="HackbalFoxdonRetailModel.FK_ProductImageTbl_ProductTbl" FromRole="ProductImageTbl" ToRole="ProductTbl" />
+        </EntityType>
         <EntityType Name="ProductTbl">
           <Key>
             <PropertyRef Name="ProductID" />
@@ -207,6 +228,7 @@
           <Property Name="SellingPrice" Type="Int32" />
           <Property Name="FoxdonPrice" Type="Int32" />
           <NavigationProperty Name="CategoryTbl" Relationship="HackbalFoxdonRetailModel.FK_ProductTbl_ProductTbl" FromRole="ProductTbl" ToRole="CategoryTbl" />
+          <NavigationProperty Name="ProductImageTbls" Relationship="HackbalFoxdonRetailModel.FK_ProductImageTbl_ProductTbl" FromRole="ProductTbl" ToRole="ProductImageTbl" />
           <NavigationProperty Name="ShopTbl" Relationship="HackbalFoxdonRetailModel.FK_ProductTbl_ShopTbl" FromRole="ProductTbl" ToRole="ShopTbl" />
         </EntityType>
         <Association Name="FK_ProductTbl_ProductTbl">
@@ -218,6 +240,18 @@
             </Principal>
             <Dependent Role="ProductTbl">
               <PropertyRef Name="CatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductImageTbl_ProductTbl">
+          <End Type="HackbalFoxdonRetailModel.ProductTbl" Role="ProductTbl" Multiplicity="0..1" />
+          <End Type="HackbalFoxdonRetailModel.ProductImageTbl" Role="ProductImageTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTbl">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductImageTbl">
+              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -233,7 +267,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -265,15 +299,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductImageTbls">
-            <EntityTypeMapping TypeName="HackbalFoxdonRetailModel.ProductImageTbl">
-              <MappingFragment StoreEntitySet="ProductImageTbl">
-                <ScalarProperty Name="ProdImgID" ColumnName="ProdImgID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ShopTbls">
             <EntityTypeMapping TypeName="HackbalFoxdonRetailModel.ShopTbl">
               <MappingFragment StoreEntitySet="ShopTbl">
@@ -282,6 +307,15 @@
                 <ScalarProperty Name="ShopPlace" ColumnName="ShopPlace" />
                 <ScalarProperty Name="ShopCity" ColumnName="ShopCity" />
                 <ScalarProperty Name="GSTIN" ColumnName="GSTIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductImageTbls">
+            <EntityTypeMapping TypeName="HackbalFoxdonRetailModel.ProductImageTbl">
+              <MappingFragment StoreEntitySet="ProductImageTbl">
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProdImgID" ColumnName="ProdImgID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

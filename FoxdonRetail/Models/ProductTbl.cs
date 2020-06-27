@@ -14,6 +14,12 @@ namespace FoxdonRetail.Models
     
     public partial class ProductTbl
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ProductTbl()
+        {
+            this.ProductImageTbls = new HashSet<ProductImageTbl>();
+        }
+    
         public long ProductID { get; set; }
         public Nullable<long> CatID { get; set; }
         public Nullable<long> ShopID { get; set; }
@@ -23,6 +29,8 @@ namespace FoxdonRetail.Models
         public Nullable<int> FoxdonPrice { get; set; }
     
         public virtual CategoryTbl CategoryTbl { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductImageTbl> ProductImageTbls { get; set; }
         public virtual ShopTbl ShopTbl { get; set; }
     }
 }

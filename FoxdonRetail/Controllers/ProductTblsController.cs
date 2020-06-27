@@ -49,7 +49,7 @@ namespace FoxdonRetail.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( ProductTbl productTbl)
+        public ActionResult Create([Bind(Include = "ProductID,CatID,ShopID,ProductName,ProductMRP,SellingPrice,FoxdonPrice")] ProductTbl productTbl)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace FoxdonRetail.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ProductTbl productTbl)
+        public ActionResult Edit([Bind(Include = "ProductID,CatID,ShopID,ProductName,ProductMRP,SellingPrice,FoxdonPrice")] ProductTbl productTbl)
         {
             if (ModelState.IsValid)
             {

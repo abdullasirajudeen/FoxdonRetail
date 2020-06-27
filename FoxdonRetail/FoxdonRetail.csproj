@@ -146,11 +146,6 @@
     <Content Include="Views\CredenstialTbls\Details.cshtml" />
     <Content Include="Views\CredenstialTbls\Edit.cshtml" />
     <Content Include="Views\CredenstialTbls\Index.cshtml" />
-    <Content Include="Views\ProductTbls\Create.cshtml" />
-    <Content Include="Views\ProductTbls\Delete.cshtml" />
-    <Content Include="Views\ProductTbls\Details.cshtml" />
-    <Content Include="Views\ProductTbls\Edit.cshtml" />
-    <Content Include="Views\ProductTbls\Index.cshtml" />
     <Content Include="Views\ShopTbls\Create.cshtml" />
     <Content Include="Views\ShopTbls\Delete.cshtml" />
     <Content Include="Views\ShopTbls\Details.cshtml" />
@@ -229,6 +224,11 @@
     <Content Include="Views\ProductImageTbls\Details.cshtml" />
     <Content Include="Views\ProductImageTbls\Edit.cshtml" />
     <Content Include="Views\ProductImageTbls\Index.cshtml" />
+    <Content Include="Views\ProductTbls\Create.cshtml" />
+    <Content Include="Views\ProductTbls\Delete.cshtml" />
+    <Content Include="Views\ProductTbls\Details.cshtml" />
+    <Content Include="Views\ProductTbls\Edit.cshtml" />
+    <Content Include="Views\ProductTbls\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

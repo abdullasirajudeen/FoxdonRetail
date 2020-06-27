@@ -28,8 +28,8 @@ namespace FoxdonRetail.Models
         public virtual DbSet<AdminTbl> AdminTbls { get; set; }
         public virtual DbSet<CategoryTbl> CategoryTbls { get; set; }
         public virtual DbSet<CredenstialTbl> CredenstialTbls { get; set; }
-        public virtual DbSet<ProductImageTbl> ProductImageTbls { get; set; }
         public virtual DbSet<ShopTbl> ShopTbls { get; set; }
+        public virtual DbSet<ProductImageTbl> ProductImageTbls { get; set; }
         public virtual DbSet<ProductTbl> ProductTbls { get; set; }
     }
 }
