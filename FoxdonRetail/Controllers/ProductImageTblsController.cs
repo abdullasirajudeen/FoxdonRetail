@@ -56,8 +56,6 @@ namespace FoxdonRetail.Controllers
                 if (file.ContentLength > 0)
                 {
                     string _Extenstion = Path.GetExtension(file.FileName);
-                    if (_Extenstion == ".pdf")
-                    {
                         string _FileName = Path.GetFileName(file.FileName);
                         string _path = Path.Combine(Server.MapPath("~/ImageUpload"), _FileName);  //Folder Name ee Blue
                         if (ModelState.IsValid)
@@ -69,8 +67,7 @@ namespace FoxdonRetail.Controllers
                             return RedirectToAction("Index");
                         }
                         return RedirectToAction("Index");
-                    }
-                    ModelState.AddModelError("MeterailPath", "Not Valid File Type");
+                    
                 }
 
             }

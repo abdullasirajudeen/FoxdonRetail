@@ -23,7 +23,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
+            <img src="~/Imageupload/@item.ImagePath" width="500" height="500" />
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ProductTbl.ProductName)
